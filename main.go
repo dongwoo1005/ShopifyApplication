@@ -56,8 +56,8 @@ func main() {
 		if page == 1 {
 			remainingCookies = response.AvailableCookies
 
-			numPages = response.Pagination.Total/response.Pagination.PerPage
-			if response.Pagination.Total % response.Pagination.PerPage != 0 {
+			numPages = response.Pagination.Total / response.Pagination.PerPage
+			if response.Pagination.Total%response.Pagination.PerPage != 0 {
 				numPages += 1
 			}
 		}
@@ -71,9 +71,9 @@ func main() {
 
 	log.WithFields(log.Fields{
 		"remainingCookies": remainingCookies,
-		"initial orders": orders,
-		"len": len(orders),
-		"cap": cap(orders),
+		"initial orders":   orders,
+		"len":              len(orders),
+		"cap":              cap(orders),
 	}).Print("1. All orders from the paginated API")
 
 	var unfulfilledOrders []Order
@@ -90,19 +90,19 @@ func main() {
 	}
 
 	log.WithFields(log.Fields{
-		"remainingCookies": remainingCookies,
+		"remainingCookies":  remainingCookies,
 		"unfulfilledOrders": unfulfilledOrders,
-		"len": len(unfulfilledOrders),
-		"cap": cap(unfulfilledOrders),
+		"len":               len(unfulfilledOrders),
+		"cap":               cap(unfulfilledOrders),
 	}).Print("2. Unfulfilled orders")
 
 	sort.Sort(byHighestNumCookiesThenLowestID(unfulfilledOrders))
 
 	log.WithFields(log.Fields{
-		"remainingCookies": remainingCookies,
+		"remainingCookies":  remainingCookies,
 		"unfulfilledOrders": unfulfilledOrders,
-		"len": len(unfulfilledOrders),
-		"cap": cap(unfulfilledOrders),
+		"len":               len(unfulfilledOrders),
+		"cap":               cap(unfulfilledOrders),
 	}).Print("3. Sorted unfulfilled orders")
 
 	var unfulfilledOrderIDs []int
@@ -116,14 +116,14 @@ func main() {
 	sort.Ints(unfulfilledOrderIDs)
 
 	output := Output{
-		RemainingCookies: remainingCookies,
+		RemainingCookies:  remainingCookies,
 		UnfulfilledOrders: unfulfilledOrderIDs,
 	}
 
 	answer, err := json.Marshal(output)
 	if err != nil {
 		log.WithFields(log.Fields{
-			"error": err,
+			"error":  err,
 			"output": output,
 		}).Fatal("main/main : Failed to get JSON encoding of output")
 	}
